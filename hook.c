@@ -9,6 +9,7 @@
 
 
 void pwn(void) {
+	chmod(getenv("CHANKRO"), 00777);
         system(getenv("CHANKRO"));
 }
 
