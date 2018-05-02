@@ -1,4 +1,4 @@
-######## Chankro v0.2 #######
+######## Chankro v0.3 #######
 
 # [+] Bypass disable_functions
 # [+] Bypass open_basedir
