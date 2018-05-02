@@ -1,6 +1,14 @@
 # Chankro
-Herramienta para evadir disable_functions y open_basedir. Permite generar un PHP que ejecutará un binario o script que se le pase como input.
+Your favourite tool to bypass __disable_functions__ and __open_basedir__ in your pentests. 
 
-Ejemplo:
+## How it works
+PHP in Linux calls a binary (sendmail) when the mail() function is executed. If we have putenv() allowed, we can set the enviroment variable "LD_PRELOAD", so we can preload an arbitrary shared object. Our shared object will execute our custom payload (a binary or a bash script) without the PHP restrictions, so we can have a reverse shell, for example.
 
-python chankro.py --arch 64 --input rev.sh --output chan.php --path /var/www/html
+## Example:
+
+The syntax is pretty straightforward:
+
+`python chankro.py --arch 64 --input rev.sh --output chan.php --path /var/www/html`
+
+Note: path is the absolute path where our .so will be dropped.
+
