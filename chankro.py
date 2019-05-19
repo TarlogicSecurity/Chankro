@@ -41,7 +41,7 @@ try:
         if (os.path.isabs(args.out)):
                 outfile = open(args.out, "w") # absolute path provided
         else:
-                outfile = open(os.getcwd() + args.out, "w") # relative path provided
+                outfile = open(os.getcwd() + '/' + args.out, "w") # relative path provided
 except:
 	print "[!] Error: file could not be created"
 	exit()
