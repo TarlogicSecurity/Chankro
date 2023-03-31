@@ -11,7 +11,7 @@ PHP in Linux calls a binary (sendmail) when the mail() function is executed. If 
 The syntax is pretty straightforward:
 
 ```
-$ python2 chankro.py --arch 64 --input rev.sh --output chan.php --path /var/www/html
+$ python chankro.py --arch 64 --input rev.sh --output chan.php --path /var/www/html
 ```
 
 Note: path is the absolute path where our .so will be dropped.
