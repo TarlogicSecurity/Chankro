@@ -22,20 +22,20 @@ args = parser.parse_args()
 # path where the tool is installed
 script_path = os.path.dirname(os.path.realpath(__file__))
 
-print "\n\n     -=[ Chankro ]=-\n    -={ @TheXC3LL }=-\n\n"
+print ("\n\n     -=[ Chankro ]=-\n    -={ @TheXC3LL }=-\n\n")
 
 
 if not args.meter:
-	print "[!] Error: please select a valid file as input"
+	print ("[!] Error: please select a valid file as input")
  	exit()
 try:
 	with open(args.meter, "rb") as file:
 		encoded_shell = base64.b64encode(file.read())
 except:
-	print "[!] Error: file could not be opened"
+	print ("[!] Error: file could not be opened")
 	exit()
 if not args.out:
-	print "[!] Error: please select a valid file as output"
+	print ("[!] Error: please select a valid file as output")
 	exit()
 try:
         if (os.path.isabs(args.out)):
@@ -43,20 +43,20 @@ try:
         else:
                 outfile = open(os.getcwd() + '/' + args.out, "w") # relative path provided
 except:
-	print "[!] Error: file could not be created"
+	print ("[!] Error: file could not be created")
 	exit()
 
 if not args.arch:
-	print "[!] Error: select architecture (64 or 32)"
+	print ("[!] Error: select architecture (64 or 32)")
 	exit()
 else:
 	if args.arch != "32" and args.arch != "64":
-		print "[!] Error: unknow architecture"
+		print ("[!] Error: unknow architecture")
 		exit()
 	else:
 		archi = script_path + "/hook" + args.arch + ".so"
 if not args.pati:
-	print "[!] Error: remote path"
+	print ("[!] Error: remote path")
 	exit()
 
 with open(archi, "rb") as bicho:
@@ -78,4 +78,4 @@ print "[+] Final PHP: " + args.out + "\n\n"
 
 outfile.write(head + body1 + body2 + body3 + cosa3 + tail1 + tail2)
 outfile.close()
-print "[+] File created!"
+print ("[+] File created!")
