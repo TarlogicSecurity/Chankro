@@ -26,7 +26,7 @@ print ("\n\n     -=[ Chankro ]=-\n    -={ @TheXC3LL }=-\n\n")
 
 
 if not args.meter:
-	print "[!] Error: please select a valid file as input"
+	print ("[!] Error: please select a valid file as input")
  	exit()
 try:
 	with open(args.meter, "rb") as file:
